@@ -98,7 +98,7 @@ export function DebtContent(){
                             
                             return (
                                 <>
-                                    <h2 key={debt.idUsuario}> {debt.motivo.replace(/"/g, '')} </h2>
+                                    <h2 key={hash}> {debt.motivo.replace(/"/g, '')} </h2>
                                     <div  className="newDebtDiv">
                                         <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
                                     </div>
