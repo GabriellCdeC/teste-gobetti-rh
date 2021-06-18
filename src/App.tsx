@@ -1,8 +1,14 @@
 import React from 'react';
+import { DebtContent } from './components/DebtContent';
+
+import './global.scss'
 
 function App() {
+
   return (
-    <h1>Hello World!</h1>
+    <div className="content">      
+      <DebtContent />         
+    </div>
   );
 }
 

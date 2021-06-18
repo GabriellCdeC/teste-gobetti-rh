@@ -1,0 +1,45 @@
+div{
+    .mainContent{
+        display: flex;
+    }
+
+    h3{
+        margin: 1rem 0;
+        text-align: center;
+        color: #ffffff;
+    }
+    .userBar{
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+        margin: 0;
+        padding: 0;
+        width: 25rem;
+        background-color: #0b1933;
+        height: 100%;
+        overflow: auto;
+        
+        a{
+            display: block;
+            color: #ffffff;
+            padding: 16px;
+            text-decoration: none;
+            border-top: solid 1px #E1E1E6; 
+
+            &:hover:not(.active){
+                background-color: #3b465b
+                ;
+                color: white;
+            } 
+
+            &:last-child{
+                border-bottom: solid 1px #E1E1E6; 
+            }
+        }
+
+        .active{
+            background: #010205;
+        }
+    }
+    
+}
