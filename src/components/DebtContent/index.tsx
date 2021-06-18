@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
+import { NewDebtModal } from '../NewDebtModal'
 import api from '../../services/api';
 import apiUsers from '../../services/apiUsers'
+import searchIcon from '../../assets/search.png'
+import paperIcon from '../../assets/copy.png'
 import './styles.scss'
 
 interface userData{
@@ -22,6 +25,15 @@ export function DebtContent(){
     const [users, setUsers] = useState<userData[]>([])
     const [hash, setHash] = useState(0)
     const [debts, setDebts] = useState<debtData[]>([])
+    const [isNewTransactionModalOpen, setIsNewTransactionModalOpen]= useState(false)
+
+    function handleOpenNewTransactionModal() {
+        setIsNewTransactionModalOpen(true)
+    }
+
+    function handleClosenNewTransactionModal() {
+        setIsNewTransactionModalOpen(false)        
+    }
 
     try{       
         useEffect(() => {
@@ -47,7 +59,7 @@ export function DebtContent(){
             async function getDebtData() {
                 const {data} = await api.get('')
                 setDebts(data.result)
-                console.log(debts)
+                console.log(data.result)
             }            
             getDebtData()
         },[]) 
@@ -75,7 +87,42 @@ export function DebtContent(){
             </div>
 
             <div className="debtContent">
-                <h1>Debt of client {hash}</h1>
+                {
+                    hash === 0 ? 
+                    <> 
+                        <img key={hash} src={searchIcon} alt="Search Icon" />
+                        <h2>Nenhum usuário selecionado, <br/> 
+                        escolha um usuário no painel ao lado para obter suas dívidas</h2> 
+                    </>
+                    :               
+                    
+                    debts.map(debt => {    
+                        return (
+                            hash === debt.idUsuario ? 
+                            <>
+                                <h2 key={debt.idUsuario}> {debt.motivo.replace(/"/g, '')} </h2>
+                                <div  className="newDebtDiv">
+                                    <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
+                                </div>
+                                <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
+
+                            </>
+                            
+                            :
+                            <> 
+                                <img key={debt.idUsuario} src={paperIcon} alt="paper icon"/>
+                                <h2>Esse usuário não possui dívidas registradas.</h2> 
+                                <div  className="newDebtDiv">
+                                    <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
+                                </div>
+                                
+                                <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
+                            </>
+                        )                       
+                    })
+                  
+                    
+                }
                 
             </div>
         

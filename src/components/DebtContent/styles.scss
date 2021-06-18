@@ -1,6 +1,7 @@
 div{
     .mainContent{
         display: flex;
+        width: 100%;
     }
 
     h3{
@@ -8,10 +9,10 @@ div{
         text-align: center;
         color: #ffffff;
     }
+
     .userBar{
         display: flex;
         flex-direction: column;
-        width: 35%;
         margin: 0;
         padding: 0;
         width: 25rem;
@@ -26,9 +27,9 @@ div{
             text-decoration: none;
             border-top: solid 1px #E1E1E6; 
 
+
             &:hover:not(.active){
-                background-color: #3b465b
-                ;
+                background-color: #3b465b;
                 color: white;
             } 
 
@@ -41,5 +42,50 @@ div{
             background: #010205;
         }
     }
-    
+
+
+  
+        .debtContent{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #232d45;
+            width: 100%;
+
+            h2{
+                color: #ffffff;
+                text-align: center;
+            }
+           
+            img{
+                height: 20%;
+            }
+            
+            
+        }
+
+        .newDebtDiv{          
+            position: absolute;
+            right: 1rem;
+            top:1rem;
+                        
+            .newDebt{
+                
+                font-size: 1rem;
+                color: #fff;
+                background: #6933FF;
+                border: 0;
+                padding: 0 2rem;
+                border-radius: 0.25rem;
+                height: 3rem;
+                transition: filter 0.2s;
+        
+                &:hover{
+                    filter: brightness(0.9)
+                }
+            }
+        }
+            
+       
 }
