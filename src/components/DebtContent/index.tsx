@@ -59,7 +59,6 @@ export function DebtContent(){
             async function getDebtData() {
                 const {data} = await api.get('')
                 setDebts(data.result)
-                console.log(data.result)
             }            
             getDebtData()
         },[]) 
@@ -68,8 +67,7 @@ export function DebtContent(){
         toast.error('Erro ao buscar dados das dívidas')
     }
 
-
-   
+    const userDebts = debts.filter(deb => deb.idUsuario === hash)
 
     return (
         <div className="mainContent">
@@ -87,42 +85,39 @@ export function DebtContent(){
             </div>
 
             <div className="debtContent">
-                {
+                { 
                     hash === 0 ? 
                     <> 
                         <img key={hash} src={searchIcon} alt="Search Icon" />
                         <h2>Nenhum usuário selecionado, <br/> 
                         escolha um usuário no painel ao lado para obter suas dívidas</h2> 
                     </>
-                    :               
-                    
-                    debts.map(debt => {    
-                        return (
-                            hash === debt.idUsuario ? 
-                            <>
-                                <h2 key={debt.idUsuario}> {debt.motivo.replace(/"/g, '')} </h2>
-                                <div  className="newDebtDiv">
-                                    <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
-                                </div>
-                                <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
-
-                            </>
+                    :    
+                    userDebts.length > 0 ?    
+                        userDebts.map(debt => {    
                             
-                            :
-                            <> 
-                                <img key={debt.idUsuario} src={paperIcon} alt="paper icon"/>
-                                <h2>Esse usuário não possui dívidas registradas.</h2> 
-                                <div  className="newDebtDiv">
-                                    <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
-                                </div>
+                            return (
+                                <>
+                                    <h2 key={debt.idUsuario}> {debt.motivo.replace(/"/g, '')} </h2>
+                                    <div  className="newDebtDiv">
+                                        <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
+                                    </div>
+                                    <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
+        
+                                    </>                            
+                                )
+                    }) :
+                        <> 
+                            <img key={hash} src={paperIcon} alt="paper icon"/>
+                            <h2>Esse usuário não possui dívidas registradas.</h2> 
+                            <div  className="newDebtDiv">
+                                <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
+                            </div>
                                 
-                                <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
-                            </>
-                        )                       
-                    })
-                  
-                    
+                            <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
+                        </>
                 }
+               
                 
             </div>
         
