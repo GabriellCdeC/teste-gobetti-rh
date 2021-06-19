@@ -2,31 +2,21 @@ import { useState, FormEvent, useCallback } from 'react'
 import Modal from 'react-modal';
 import api from '../../services/api';
 import closeImg from '../../assets/close.svg'
-import './styles.scss'
+import '../NewDebtModal/styles.scss'
 
 interface NewDebtModalData{
     isOpen: boolean
     onRequestClose: () => void
-    idUsuario: number
-    setDebt: any
+  
 }
 
-export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewDebtModalData) {
+export function DebtDetailsModal ({isOpen, onRequestClose}: NewDebtModalData) {
 
     const [motivo, setmotivo] = useState('')
     const [valor, setValor] = useState(0)
 
     async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
-
-        await api.post('', {idUsuario, motivo, valor});      
-        const {data} = await api.get('')   
-
-        setDebt(data.result)
-      
-        setmotivo('')
-        setValor(0)
-        onRequestClose()
     }
 
     return (
@@ -46,12 +36,12 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewD
             </button>
 
             <form onSubmit={handleCreateNewTransaction}>
-                <h2>Cadastrar dívida</h2>
+                <h2>Detalhes da dívida</h2>
 
-                <input type="text" placeholder="Motivo" value={motivo} onChange={event => setmotivo(event.target.value)} />
-                <input type="number" placeholder="Valor" value={valor} onChange={event => setValor(Number(event.target.value))} />
+                <p>TESTE</p>
+                <p>TESTE</p>
 
-                <button type="submit">Cadastrar</button>
+                <button type="submit">Deletar</button>
             </form>        
             
         </Modal>

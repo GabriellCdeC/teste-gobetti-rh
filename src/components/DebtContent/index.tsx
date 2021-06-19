@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
 import { NewDebtModal } from '../NewDebtModal'
+import { DebtDetailsModal } from '../DebtDetailsModal'
 import api from '../../services/api';
 import apiUsers from '../../services/apiUsers'
 import searchIcon from '../../assets/search.png'
@@ -25,14 +26,23 @@ export function DebtContent(){
     const [users, setUsers] = useState<userData[]>([])
     const [hash, setHash] = useState(0)
     const [debts, setDebts] = useState<debtData[]>([])
-    const [isNewTransactionModalOpen, setIsNewTransactionModalOpen]= useState(false)
+    const [isNewDebtModalOpen, setIsNewDebtModalOpen]= useState(false)
+    const [isDebtDetailsModalOpen, setIsDebtDetailsModalOpen]= useState(false)
 
     function handleOpenNewTransactionModal() {
-        setIsNewTransactionModalOpen(true)
+        setIsNewDebtModalOpen(true)
     }
 
     function handleClosenNewTransactionModal() {
-        setIsNewTransactionModalOpen(false)        
+        setIsNewDebtModalOpen(false)        
+    }
+
+    function handleOpenDebtDetailsModal() {
+        setIsDebtDetailsModalOpen(true)
+    }
+
+    function handleClosenDebtDetailsModal() {
+        setIsDebtDetailsModalOpen(false)        
     }
 
     try{       
@@ -99,18 +109,22 @@ export function DebtContent(){
                             return (
                                 <>
                                     <div className="debtList">
-                                     <h2> {debt.motivo} </h2>
+                                      <button type="button" onClick={handleOpenDebtDetailsModal}>
+                                          <h2> {debt.motivo} </h2>
+                                        </button> 
+                                      <DebtDetailsModal isOpen={isDebtDetailsModalOpen} onRequestClose={handleClosenDebtDetailsModal}/>
                                     </div>
 
 
                                     <div  className="newDebtDiv">
                                         <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
                                     </div>
-                                    <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
+                                    <NewDebtModal isOpen={isNewDebtModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
         
                                     </>                            
                                 )
-                    }) :
+                        })
+                    :
                         <> 
                             <img key={hash} src={paperIcon} alt="paper icon"/>
                             <h2>Esse usuário não possui dívidas registradas.</h2> 
@@ -118,7 +132,7 @@ export function DebtContent(){
                                 <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
                             </div>
                                 
-                            <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
+                            <NewDebtModal isOpen={isNewDebtModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
                         </>
                 }
                
