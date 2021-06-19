@@ -78,7 +78,7 @@ export function DebtContent(){
                     users.map(user => {
                         return (                            
                             hash === user.id ? <button key={user.id} className="buttonLink" onClick={() => handleChangeUser(user.id)} ><a  id="userData" className="active">{user.name}</a></button>  :
-                            <button key={user.id} className="buttonLink" onClick={() => handleChangeUser(user.id)}><a>{user.name}</a></button>                   
+                            <button key={user.id} className="buttonLink" onClick={() => handleChangeUser(user.id)}><a>{user.name}</a></button>               
                         )
                     })
                 }
@@ -106,7 +106,7 @@ export function DebtContent(){
                                     <div  className="newDebtDiv">
                                         <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
                                     </div>
-                                    <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
+                                    <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
         
                                     </>                            
                                 )
@@ -118,7 +118,7 @@ export function DebtContent(){
                                 <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
                             </div>
                                 
-                            <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} />
+                            <NewDebtModal isOpen={isNewTransactionModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
                         </>
                 }
                

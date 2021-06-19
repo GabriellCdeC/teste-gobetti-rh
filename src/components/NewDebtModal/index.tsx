@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useCallback } from 'react'
 import Modal from 'react-modal';
 import api from '../../services/api';
 import closeImg from '../../assets/close.svg'
@@ -8,24 +8,25 @@ interface NewDebtModalData{
     isOpen: boolean;
     onRequestClose: () => void;
     idUsuario: number
+    setDebt: any
 }
 
-export function NewDebtModal ({isOpen, onRequestClose, idUsuario}: NewDebtModalData) {
+export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewDebtModalData) {
 
     const [motivo, setmotivo] = useState('')
     const [valor, setValor] = useState(0)
 
-
     async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
 
-        const response = await api.post('', {idUsuario, motivo, valor});      
-    
+        await api.post('', {idUsuario, motivo, valor});      
+        const {data} = await api.get('')   
+
+        setDebt(data.result)
+      
         setmotivo('')
         setValor(0)
         onRequestClose()
-
-        return response.status
     }
 
     return (
@@ -43,7 +44,7 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario}: NewDebtModalD
                 <img src={closeImg} alt="Fechar Modal" /> 
             </button>
 
-            <form onSubmit={handleCreateNewTransaction} >
+            <form onSubmit={handleCreateNewTransaction}>
                 <h2>Cadastrar dívida</h2>
 
                 <input type="text" placeholder="Motivo" value={motivo} onChange={event => setmotivo(event.target.value)} />
