@@ -19,13 +19,13 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario}: NewDebtModalD
     async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
 
-        console.log(motivo)
-        console.log(valor)
-        console.log(idUsuario)
-
+        const response = await api.post('', {idUsuario, motivo, valor});      
+    
         setmotivo('')
         setValor(0)
         onRequestClose()
+
+        return response.status
     }
 
     return (
