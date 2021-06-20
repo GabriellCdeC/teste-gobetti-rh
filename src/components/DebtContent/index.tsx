@@ -25,6 +25,7 @@ interface debtData {
 export function DebtContent(){
     const [users, setUsers] = useState<userData[]>([])
     const [hash, setHash] = useState(0)
+    const [index, setIndex] = useState(-1)
     const [debts, setDebts] = useState<debtData[]>([])
     const [isNewDebtModalOpen, setIsNewDebtModalOpen]= useState(false)
     const [isDebtDetailsModalOpen, setIsDebtDetailsModalOpen]= useState(false)
@@ -37,8 +38,9 @@ export function DebtContent(){
         setIsNewDebtModalOpen(false)        
     }
 
-    function handleOpenDebtDetailsModal() {
+    function handleOpenDebtDetailsModal(i: number) {
         setIsDebtDetailsModalOpen(true)
+        setIndex(i)
     }
 
     function handleClosenDebtDetailsModal() {
@@ -67,7 +69,7 @@ export function DebtContent(){
         useEffect(() => {
     
             async function getDebtData() {
-                const {data} = await api.get('')
+                const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')
                 setDebts(data.result)
             }            
             getDebtData()
@@ -104,26 +106,39 @@ export function DebtContent(){
                     </>
                     :    
                     userDebts.length > 0 ?    
-                        userDebts.map(debt => {    
-                            
-                            return (
-                                <>
-                                    <div className="debtList">
-                                      <button type="button" onClick={handleOpenDebtDetailsModal}>
-                                          <h2> {debt.motivo} </h2>
-                                        </button> 
-                                      <DebtDetailsModal isOpen={isDebtDetailsModalOpen} onRequestClose={handleClosenDebtDetailsModal}/>
-                                    </div>
+                    <>
+                        <DebtDetailsModal isOpen={isDebtDetailsModalOpen} 
+                            onRequestClose={handleClosenDebtDetailsModal} 
+                            debts={userDebts}
+                            setDebt={setDebts}
+                            index={index}
+                        />  
+                        {
+                            userDebts.map((debt, index) => {    
+                                           
+                                return (
+                                    <>
+                                        <div className="debtList">
+                                        <button type="button" onClick={() => handleOpenDebtDetailsModal(index)} >
+                                            <h2> {debt.motivo} </h2>                                            
+                                            </button> 
+                                        
+                                        </div>
 
 
-                                    <div  className="newDebtDiv">
-                                        <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
-                                    </div>
-                                    <NewDebtModal isOpen={isNewDebtModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
-        
+                                        <div  className="newDebtDiv">
+                                            <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
+                                        </div>
+                                        <NewDebtModal isOpen={isNewDebtModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
+
                                     </>                            
-                                )
-                        })
+                                    )
+                            })
+                        }
+
+                            
+                       
+                    </>
                     :
                         <> 
                             <img key={hash} src={paperIcon} alt="paper icon"/>

@@ -1,4 +1,4 @@
-import { useState, FormEvent, useCallback } from 'react'
+import { useState, FormEvent} from 'react'
 import Modal from 'react-modal';
 import api from '../../services/api';
 import closeImg from '../../assets/close.svg'
@@ -19,8 +19,8 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewD
     async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
 
-        await api.post('', {idUsuario, motivo, valor});      
-        const {data} = await api.get('')   
+        await api.post('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7', {idUsuario, motivo, valor});      
+        const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')   
 
         setDebt(data.result)
       

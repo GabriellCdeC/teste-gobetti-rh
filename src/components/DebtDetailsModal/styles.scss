@@ -1,0 +1,44 @@
+div {
+    .debtDetails{
+        h2 {
+            color: #363F5F;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        p {
+            padding: 0.5rem;
+            strong{
+                font-size: 1.2rem;
+                font-weight: 900;
+            }
+
+            i{
+                font-size: 0.8rem;
+                color:#363F5F;
+            }
+        }
+    
+        button[type="button"] {
+            width: 100%;
+            padding: 0 1.5rem;
+            height: 4rem;
+            background:#990d0d;
+            color: #fff;
+            border-radius: 0.25rem;
+            border: 0;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            transition: filter 0.2s;
+            
+            &:hover{
+                filter: brightness(0.9);
+            }
+    
+            
+        }
+    }
+   
+
+}
