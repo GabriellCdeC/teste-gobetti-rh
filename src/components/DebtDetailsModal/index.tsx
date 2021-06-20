@@ -25,6 +25,12 @@ export function DebtDetailsModal ({isOpen, onRequestClose,setDebt, debts, index}
         onRequestClose()
     }
 
+    async function handleEditDebt(_id: number){
+        console.log(_id)
+        onRequestClose()
+    }
+
+
     if(selectedDebt.length > 0){
         return (
             <Modal 
@@ -52,6 +58,7 @@ export function DebtDetailsModal ({isOpen, onRequestClose,setDebt, debts, index}
                     <p>Criado em: {new Intl.DateTimeFormat('pt-BR').format(new Date(selectedDebt[0].criado))}</p>
                     <p><i>{selectedDebt[0]._id}</i></p>
 
+                    <button type="button" className="buttonEdit" onClick={() => handleEditDebt(selectedDebt[0]._id)}>Editar dívida</button>
                     <button type="button" className="buttonDelete" onClick={() => handleDeleteDebt(selectedDebt[0]._id)}>Excluir dívida</button>
                 </div>        
                 

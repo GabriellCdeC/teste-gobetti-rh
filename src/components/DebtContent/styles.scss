@@ -1,7 +1,12 @@
 div{
+    
     .mainContent{
         display: flex;
         width: 100%;
+    }
+    h2{
+        color: #ffffff;
+        text-align: center;
     }
 
     h3{
@@ -53,10 +58,28 @@ div{
             background-color: #232d45;
             width: 100%;
 
-            h2{
-                color: #ffffff;
-                text-align: center;
+            .titleDivida{
+                position: absolute;
+                top: 1rem;
+                
+                h1{
+                    color:#f1f1f1;
+                }
             }
+            
+            .debtList {
+                width: 50%;
+                background: #3d4f79;
+                margin-bottom: 0.4rem;
+                text-align: center;
+                box-shadow: 3px 3px black;
+                transition: filter 0.2s;
+        
+                &:hover{
+                    filter: brightness(0.9)
+                }
+            }
+            
            
             img{
                 height: 20%;

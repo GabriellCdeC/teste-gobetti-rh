@@ -3,7 +3,7 @@ div {
         h2 {
             color: #363F5F;
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         
         p {
@@ -20,24 +20,28 @@ div {
         }
     
         button[type="button"] {
+            
             width: 100%;
             padding: 0 1.5rem;
-            height: 4rem;
-            background:#990d0d;
+            height: 3rem;
+            background:#33CC95;
             color: #fff;
             border-radius: 0.25rem;
             border: 0;
             font-size: 1rem;
-            margin-top: 1.5rem;
             font-weight: 600;
             transition: filter 0.2s;
             
             &:hover{
                 filter: brightness(0.9);
             }
-    
-            
+
+            & + button {
+                margin-top: 0.8rem;
+                background:#990d0d;
+            }
         }
+        
     }
    
 

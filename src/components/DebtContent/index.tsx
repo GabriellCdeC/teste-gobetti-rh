@@ -102,7 +102,7 @@ export function DebtContent(){
                     <> 
                         <img key={hash} src={searchIcon} alt="Search Icon" />
                         <h2>Nenhum usuário selecionado, <br/> 
-                        escolha um usuário no painel ao lado para obter suas dívidas</h2> 
+                        escolha um usuário no painel ao lado para obter suas dívidas.</h2> 
                     </>
                     :    
                     userDebts.length > 0 ?    
@@ -113,17 +113,18 @@ export function DebtContent(){
                             setDebt={setDebts}
                             index={index}
                         />  
+                        <div className="titleDivida" >
+                            <h1>Lista de dívidas</h1>
+                        </div>
+                        
                         {
                             userDebts.map((debt, index) => {    
                                            
                                 return (
                                     <>
-                                        <div className="debtList">
-                                        <button type="button" onClick={() => handleOpenDebtDetailsModal(index)} >
-                                            <h2> {debt.motivo} </h2>                                            
-                                            </button> 
-                                        
-                                        </div>
+                                    <button key={hash} type="button" onClick={() => handleOpenDebtDetailsModal(index)} className="debtList">
+                                        <h2> {debt.motivo} </h2>                                              
+                                    </button>
 
 
                                         <div  className="newDebtDiv">
@@ -135,9 +136,6 @@ export function DebtContent(){
                                     )
                             })
                         }
-
-                            
-                       
                     </>
                     :
                         <> 

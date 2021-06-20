@@ -46,7 +46,7 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewD
             </button>
 
             <form onSubmit={handleCreateNewTransaction}>
-                <h2>Cadastrar dívida</h2>
+                <h2 className="h2NewDebt">Cadastrar dívida</h2>
 
                 <input type="text" placeholder="Motivo" value={motivo} onChange={event => setmotivo(event.target.value)} />
                 <input type="number" placeholder="Valor" value={valor} onChange={event => setValor(Number(event.target.value))} />
