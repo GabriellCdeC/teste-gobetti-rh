@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="content">      
       <DebtContent />       
-      <ToastContainer autoClose={3000} position="top-left" />
+      <ToastContainer autoClose={3000} position="top-left"/>
     </div>
   );
 }

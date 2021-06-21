@@ -117,8 +117,12 @@ export function DebtContent(){
                         <div className="titleDivida" >
                             <h1>Lista de dívidas</h1>
                         </div>
-                        
+
+                        <div  className="newDebtDiv">
+                            <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
+                        </div>
                         {
+                            
                             userDebts.map((debt, index) => {    
                                            
                                 return (
@@ -126,12 +130,8 @@ export function DebtContent(){
                                     <button key={hash} type="button" onClick={() => handleOpenDebtDetailsModal(index)} className="debtList">
                                         <h2> {debt.motivo} </h2>                                              
                                     </button>
-
-
-                                        <div  className="newDebtDiv">
-                                            <button type="button" className="newDebt" onClick={handleOpenNewTransactionModal}>Cadastrar nova dívida</button>
-                                        </div>
-                                        <NewDebtModal isOpen={isNewDebtModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
+                                    
+                                    <NewDebtModal isOpen={isNewDebtModalOpen} onRequestClose={handleClosenNewTransactionModal} idUsuario={hash} setDebt={setDebts} />
 
                                     </>                            
                                     )

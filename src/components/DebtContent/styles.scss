@@ -78,6 +78,11 @@ div{
                 &:hover{
                     filter: brightness(0.9)
                 }
+
+                @media (max-width: 720px){
+                    
+                    width: 90%;
+                }
             }
             
            
@@ -94,7 +99,6 @@ div{
             top:1rem;
                         
             .newDebt{
-                
                 font-size: 1rem;
                 color: #fff;
                 background: #6933FF;
@@ -107,6 +111,25 @@ div{
                 &:hover{
                     filter: brightness(0.9)
                 }
+            }   
+        }
+
+        @media (max-width: 720px){
+            .newDebtDiv{          
+                position: absolute;
+                width: 50%;
+                top: 90%;
+                left: 1rem;
+                .newDebt{
+                
+                padding: 0 0.5rem;
+                   
+                }
+            }
+
+            h1{
+                text-align: center;
             }
         }
+        
 }
