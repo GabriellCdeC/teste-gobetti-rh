@@ -111,6 +111,7 @@ export function DebtContent(){
                             onRequestClose={handleClosenDebtDetailsModal} 
                             debts={userDebts}
                             setDebt={setDebts}
+                            idUsuario={hash}
                             index={index}
                         />  
                         <div className="titleDivida" >

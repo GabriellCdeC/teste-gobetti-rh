@@ -1,4 +1,5 @@
 import { useState, FormEvent} from 'react'
+import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import api from '../../services/api';
 import closeImg from '../../assets/close.svg'
@@ -18,14 +19,19 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewD
 
     async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
+        try{
+            await api.post('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7', {idUsuario, motivo, valor});      
+            const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')   
 
-        await api.post('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7', {idUsuario, motivo, valor});      
-        const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')   
+            setDebt(data.result)
+        
+            setmotivo('')
+            setValor(0)
+        } catch {
+            toast.error('Erro ao cadastrar dívida')
+        }
 
-        setDebt(data.result)
-      
-        setmotivo('')
-        setValor(0)
+        
         onRequestClose()
     }
 
