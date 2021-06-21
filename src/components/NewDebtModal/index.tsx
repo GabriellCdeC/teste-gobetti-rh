@@ -19,12 +19,21 @@ export function NewDebtModal ({isOpen, onRequestClose, idUsuario, setDebt}: NewD
 
     async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
+
         try{
+
+            if(motivo === ''){
+                toast.error("Por favor, informe o motivo.")
+                return
+            }
+
             await api.post('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7', {idUsuario, motivo, valor});      
             const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')   
 
             setDebt(data.result)
-        
+
+            toast.success("Dívida criada com suceso.")
+            
             setmotivo('')
             setValor(0)
         } catch {

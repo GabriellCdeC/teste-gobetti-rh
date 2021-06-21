@@ -30,8 +30,8 @@ export function DebtDetailsModal ({isOpen, onRequestClose,setDebt, debts, index,
             await api.delete(`${_id}/?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7`)
             const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')   
             setDebt(data.result)
-    
-            
+            toast.success("Dívida excluída com suceso.")
+
         }catch{
             toast.error("Erro ao excluir a dívida")
         }
@@ -49,12 +49,17 @@ export function DebtDetailsModal ({isOpen, onRequestClose,setDebt, debts, index,
         event.preventDefault()
 
         try{
+            if(motivo === ''){
+                toast.error("Por favor, informe o motivo.")
+                return
+            }
             await api.patch(`${selectedDebt[0]._id}/?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7`, {idUsuario, motivo, valor})
             const {data} = await api.get('?uuid=82e53167-1faa-4b81-a5af-03507c4aeab7')   
             setDebt(data.result)
+            toast.success("Dívida alterada com suceso.")
 
         } catch {
-            toast.error("Erro ao editar a dívida")
+            toast.error("Erro ao editar a dívida.")
         }
         setIsOpen(false)
         onRequestClose()
